@@ -16,6 +16,7 @@ namespace PhotoRenamer
     public partial class MainForm : Form
     {
 		private ExifManager ExifData;
+		private Dictionary<int, string> ExifDataSource;
         private const int IMAGE_SIZE = 100;
 
         public MainForm()
@@ -31,6 +32,7 @@ namespace PhotoRenamer
             rdoTile.FlatAppearance.BorderSize = 0;
             rdoList.Checked = true;
 			ExifData = new ExifManager();
+			ExifDataSource = ExifData.CommonExif;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -104,7 +106,9 @@ namespace PhotoRenamer
                     count++;
                 }
                 invalidateImageListView();
-            }
+				UpdateExifList();
+
+			}
         }
 
         private void listViewImages_DragEnter(object sender, DragEventArgs e)
@@ -155,18 +159,46 @@ namespace PhotoRenamer
             MessageBox.Show(this, "This application will make copies of photos and rename them based on their EXIF properties.", "About this application");
         }
 
-        //https://stackoverflow.com/questions/11624298/how-to-use-openfiledialog-to-select-a-folder
-        private void openFolderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (var folderBrowserDialog = new FolderBrowserDialog())
-            {
-                DialogResult result = folderBrowserDialog.ShowDialog();
+		//https://stackoverflow.com/questions/11624298/how-to-use-openfiledialog-to-select-a-folder
+		private void openFolderToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			using (var folderBrowserDialog = new FolderBrowserDialog())
+			{
+				DialogResult result = folderBrowserDialog.ShowDialog();
 
-                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
-                {
-                    addImagesByFileName(Directory.GetFiles(folderBrowserDialog.SelectedPath));
-                }
-            }
-        }
+				if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
+				{
+					addImagesByFileName(Directory.GetFiles(folderBrowserDialog.SelectedPath));
+				}
+			}
+		}
+
+		private void UpdateExifList()
+		{
+			List<string> data = new List<string>();
+			for (int i = 0; i < ExifDataSource.Count; i++)
+			{
+				data.Add(ExifDataSource.Values.ElementAt(i));
+			}
+			lstExifTags.DataSource = data;
+		}
+
+		private void checkBox1_CheckedChanged(object sender, EventArgs e)
+		{
+			if (checkBox1.Checked)
+			{
+				ExifDataSource = ExifData.CommonExif;
+			}
+			else
+			{
+				ExifDataSource = ExifData.AllExif;
+			}
+			UpdateExifList();
+		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

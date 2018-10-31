@@ -15,11 +15,13 @@ namespace PhotoRenamer
 		public Dictionary<string, Image> images;
 
 		private Dictionary<int, int> AllExifCount;
-		private Dictionary<int, string> ExifPropertyNames;
+		public Dictionary<int, string> ExifPropertyNamesById;
+		public Dictionary<string, int> ExifPropertyIdsByName;
+
 
 		public ExifManager()
 		{
-			ExifPropertyNames = new Dictionary<int, string>{
+			ExifPropertyNamesById = new Dictionary<int, string>{
 				{ 0x0000, "GpsVer" },{
 				0x0001, "GpsLatitudeRef" },{
 				0x0002, "GpsLatitude" },{
@@ -238,6 +240,11 @@ namespace PhotoRenamer
 				0xA301, "ExifSceneType" },{
 				0xA302, "ExifCfaPattern" }
 			};
+			ExifPropertyIdsByName = new Dictionary<string, int>();
+			foreach (int i in ExifPropertyNamesById.Keys)
+			{
+				ExifPropertyIdsByName.Add(ExifPropertyNamesById[i], i);
+			}
 			AllExifCount = new Dictionary<int, int>();
 			images = new Dictionary<string, Image>();
 			AllExif = new Dictionary<int, string>();
@@ -291,7 +298,7 @@ namespace PhotoRenamer
 			for (int i = 0; i < AllExifCount.Count; i++)
 			{
 				int key = AllExifCount.Keys.ElementAt(i);
-				string name = ExifPropertyNames.ContainsKey(key) ? ExifPropertyNames[key] : "Unknown Property";
+				string name = ExifPropertyNamesById.ContainsKey(key) ? ExifPropertyNamesById[key] : "Unknown Property";
 				if (AllExifCount[key] > 0)
 				{
 					AllExif.Add(key, name);

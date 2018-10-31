@@ -47,10 +47,13 @@
 			this.listView1 = new System.Windows.Forms.ListView();
 			this.lblOutput = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
-			this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
 			this.ctmOpen = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openFileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.lstExifTags = new System.Windows.Forms.ListBox();
+			this.checkBox1 = new System.Windows.Forms.CheckBox();
+			this.button1 = new System.Windows.Forms.Button();
+			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.menuStrip1.SuspendLayout();
 			this.ctmOpen.SuspendLayout();
 			this.SuspendLayout();
@@ -236,6 +239,7 @@
 			this.listView1.Size = new System.Drawing.Size(515, 333);
 			this.listView1.TabIndex = 10;
 			this.listView1.UseCompatibleStateImageBehavior = false;
+			this.listView1.View = System.Windows.Forms.View.List;
 			// 
 			// lblOutput
 			// 
@@ -262,19 +266,6 @@
 			this.label1.TabIndex = 12;
 			this.label1.Text = "EXIF Options";
 			// 
-			// checkedListBox1
-			// 
-			this.checkedListBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkedListBox1.CheckOnClick = true;
-			this.checkedListBox1.FormattingEnabled = true;
-			this.checkedListBox1.HorizontalScrollbar = true;
-			this.checkedListBox1.Location = new System.Drawing.Point(16, 464);
-			this.checkedListBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-			this.checkedListBox1.Name = "checkedListBox1";
-			this.checkedListBox1.Size = new System.Drawing.Size(1511, 174);
-			this.checkedListBox1.TabIndex = 13;
-			// 
 			// ctmOpen
 			// 
 			this.ctmOpen.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -300,13 +291,53 @@
 			this.openFileToolStripMenuItem1.Text = "Open File...";
 			this.openFileToolStripMenuItem1.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
 			// 
+			// lstExifTags
+			// 
+			this.lstExifTags.FormattingEnabled = true;
+			this.lstExifTags.ItemHeight = 16;
+			this.lstExifTags.Location = new System.Drawing.Point(20, 465);
+			this.lstExifTags.Name = "lstExifTags";
+			this.lstExifTags.Size = new System.Drawing.Size(697, 196);
+			this.lstExifTags.TabIndex = 13;
+			// 
+			// checkBox1
+			// 
+			this.checkBox1.AutoSize = true;
+			this.checkBox1.Location = new System.Drawing.Point(453, 442);
+			this.checkBox1.Name = "checkBox1";
+			this.checkBox1.Size = new System.Drawing.Size(264, 21);
+			this.checkBox1.TabIndex = 14;
+			this.checkBox1.Text = "Only Show Exif Tags All Images Have";
+			this.checkBox1.UseVisualStyleBackColor = true;
+			this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+			// 
+			// button1
+			// 
+			this.button1.Location = new System.Drawing.Point(724, 465);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(160, 35);
+			this.button1.TabIndex = 15;
+			this.button1.Text = "Add Exif Tag To Name";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
+			// 
+			// textBox1
+			// 
+			this.textBox1.Location = new System.Drawing.Point(723, 632);
+			this.textBox1.Name = "textBox1";
+			this.textBox1.Size = new System.Drawing.Size(664, 22);
+			this.textBox1.TabIndex = 16;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(1541, 666);
-			this.Controls.Add(this.checkedListBox1);
+			this.Controls.Add(this.textBox1);
+			this.Controls.Add(this.button1);
+			this.Controls.Add(this.checkBox1);
+			this.Controls.Add(this.lstExifTags);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.lblOutput);
 			this.Controls.Add(this.listView1);
@@ -344,13 +375,16 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label lblOutput;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.ContextMenuStrip ctmOpen;
         private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem openFolderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openFolderToolStripMenuItem1;
-    }
+		private System.Windows.Forms.ListBox lstExifTags;
+		private System.Windows.Forms.CheckBox checkBox1;
+		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.TextBox textBox1;
+	}
 }
 
