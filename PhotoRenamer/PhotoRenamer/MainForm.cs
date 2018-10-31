@@ -15,6 +15,7 @@ namespace PhotoRenamer
     // and https://stackoverflow.com/questions/68598/how-do-i-drag-and-drop-files-into-an-application
     public partial class MainForm : Form
     {
+		private ExifManager ExifData;
         private const int IMAGE_SIZE = 100;
 
         public MainForm()
@@ -29,6 +30,7 @@ namespace PhotoRenamer
             rdoTile.BackColor = Color.White;
             rdoTile.FlatAppearance.BorderSize = 0;
             rdoList.Checked = true;
+			ExifData = new ExifManager();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -85,7 +87,9 @@ namespace PhotoRenamer
                     {
                         if (!listViewImages.Items.ContainsKey(fileinfo.FullName))
                         {
-                            imageList.Images.Add(Image.FromStream(stream));
+							Image image = Image.FromStream(stream);
+                            imageList.Images.Add(image);
+							ExifData.AddImage(filename, image);
                         }
                     }
 
@@ -164,5 +168,5 @@ namespace PhotoRenamer
                 }
             }
         }
-    }
+	}
 }
