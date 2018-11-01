@@ -206,11 +206,24 @@ namespace PhotoRenamer
 
 		private void btnRename_Click(object sender, EventArgs e)
 		{
+			List<string> filenames = new List<string>();
 			foreach (ListViewItem pic in listViewImages.Items)
 			{
 				string NewName = renamer.ParseString(txtFilenameFormula.Text, pic.Text);
+				if (filenames.Contains(NewName))
+				{
+					int counter = 1;
+					while (filenames.Contains(NewName.Insert(NewName.LastIndexOf('.'), "(" + counter +")")))
+					{
+						counter++;
+					}
+					NewName = NewName.Insert(NewName.LastIndexOf('.'), "(" + counter + ")");
+				}
+				filenames.Add(NewName);
+				
+
 				string OriginalPath = pic.Name;
-				string NewPath = OriginalPath.Substring(0, OriginalPath.LastIndexOfAny(new char[] { '/', '\\' })) + NewName;
+				string NewPath = OriginalPath.Substring(0, OriginalPath.LastIndexOfAny(new char[] { '/', '\\' }) + 1) + NewName;
 				File.Move(OriginalPath, NewPath);
 			}
 		}

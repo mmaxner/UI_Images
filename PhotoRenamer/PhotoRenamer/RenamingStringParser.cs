@@ -43,7 +43,7 @@ namespace PhotoRenamer
 				}
 				
 			}
-			return (text + extension).Replace("\0", "" ) + '\0';
+			return (text + extension).Replace("\0", "" );
 		}
 	}
 }
