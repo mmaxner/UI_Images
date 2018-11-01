@@ -201,10 +201,34 @@ namespace PhotoRenamer
 
 		private void button1_Click(object sender, EventArgs e)
 		{
+			txtFilenameFormula.Text += "<" + lstExifTags.SelectedItem.ToString() + ">";
+		}
+
+		
+
+		private void btnAddText_Click(object sender, EventArgs e)
+		{
+			txtFilenameFormula.Text += txtLiteralText.Text;
+			txtLiteralText.Text = "";
+		}
+
+		private void btnRename_Click(object sender, EventArgs e)
+		{
+			
+		}
+
+		private void UpdatePreview()
+		{
+			lstPreview.Items.Clear();
 			foreach (ListViewItem pic in listViewImages.Items)
 			{
-				Console.WriteLine(renamer.ParseString(textBox1.Text, pic.Text));
+				lstPreview.Items.Add(renamer.ParseString(txtFilenameFormula.Text, pic.Text));
 			}
+		}
+
+		private void txtFilenameFormula_TextChanged(object sender, EventArgs e)
+		{
+			UpdatePreview();
 		}
 	}
 }

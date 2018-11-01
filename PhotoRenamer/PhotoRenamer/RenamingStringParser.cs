@@ -13,6 +13,7 @@ namespace PhotoRenamer
 		public string ParseString(string text, string original)
 		{
 			Image image = Exif.images[original];
+			string extension = original.Substring(original.LastIndexOf('.'), original.Length - original.LastIndexOf('.'));
 			int start_count = text.Split('<').Length;
 			int end_count = text.Split('>').Length;
 			if (start_count < end_count)
@@ -24,24 +25,23 @@ namespace PhotoRenamer
 				return "Invalid Name: " + (start_count - end_count).ToString() + " Start Tag(s) (<) without End Tag (>)";
 			}
 			string Name = "";
-			string[] tokens = text.Split(new char[]{ '<', '>'});
-			for (int i = 0; i < tokens.Length; i++)
+
+			while (text.IndexOf('<') >= 0)
 			{
-				if (tokens[i] == "<")
+				string propertizzle = text.Substring(text.IndexOf('<'), text.IndexOf('>') - text.IndexOf('<') + 1);
+				string propertizzleName = propertizzle.Substring(1, propertizzle.Length - 2);
+				try
 				{
-					i++;    // go past the open tag to the propertizzle name
-					Name += Exif.ParseProperty(image.GetPropertyItem(Exif.ExifPropertyIdsByName[tokens[i]]));
-					// find the propertizzle
-
-					i++;	// skip past the end tag
+					string propertizzleValue = Exif.ParseProperty(image.GetPropertyItem(Exif.ExifPropertyIdsByName[propertizzleName]));
+					text = text.Replace(propertizzle, propertizzleValue);
 				}
-				else
+				catch (Exception NotFoundEx)
 				{
-					Name += tokens[i];
+					text =  text.Replace(propertizzle, "Value Not Found");
 				}
+				
 			}
-
-			return Name;
+			return (text + extension).Replace("\0", "" ) + '\0';
 		}
 	}
 }

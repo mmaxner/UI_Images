@@ -378,4 +378,10 @@
         VpwrJjwSvNrwRmL4jyd3fYxKxb7y6b0Rj4KjRrVTrNGeN8037uv9n1W4EbUAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>The Filename Formula will be used to rename your files based on available Exif data. 
+Any text in alligator brackets will be replaced with the Exif data in the file. Other text will be read literally. 
+Example: "&lt;GPS_Location&gt; Photos &lt;ExifDate&gt; by Joe Photo" Might produce a name like
+"Kentucky Photos 2018-11-01 by Joe Photo.png"</value>
+  </data>
 </root>
