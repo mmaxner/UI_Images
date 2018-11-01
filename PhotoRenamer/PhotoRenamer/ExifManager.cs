@@ -310,7 +310,7 @@ namespace PhotoRenamer
 			}
 		}
 
-		private string ParseProperty(PropertyItem property)
+		public string ParseProperty(PropertyItem property)
 		{
 			string PropertyValue = "";
 			switch (property.Type)

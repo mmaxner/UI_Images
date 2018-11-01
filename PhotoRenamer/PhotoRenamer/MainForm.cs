@@ -16,6 +16,7 @@ namespace PhotoRenamer
     public partial class MainForm : Form
     {
 		private ExifManager ExifData;
+		private RenamingStringParser renamer;
 		private Dictionary<int, string> ExifDataSource;
         private const int IMAGE_SIZE = 100;
 
@@ -33,6 +34,8 @@ namespace PhotoRenamer
             rdoList.Checked = true;
 			ExifData = new ExifManager();
 			ExifDataSource = ExifData.CommonExif;
+			renamer = new RenamingStringParser();
+			renamer.Exif = ExifData;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -91,7 +94,7 @@ namespace PhotoRenamer
                         {
 							Image image = Image.FromStream(stream);
                             imageList.Images.Add(image);
-							ExifData.AddImage(filename, image);
+							ExifData.AddImage(fileinfo.Name, image);
                         }
                     }
 
@@ -198,7 +201,10 @@ namespace PhotoRenamer
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-
+			foreach (ListViewItem pic in listViewImages.Items)
+			{
+				Console.WriteLine(renamer.ParseString(textBox1.Text, pic.Text));
+			}
 		}
 	}
 }
