@@ -10,6 +10,7 @@ namespace PhotoRenamer
 	class RenamingStringParser
 	{
 		public ExifManager Exif;
+		public bool AllImagesHaveAllExif = true;
 		public string ParseString(string text, string original)
 		{
 			Image image = Exif.images[original];
@@ -37,7 +38,8 @@ namespace PhotoRenamer
 				}
 				catch (Exception NotFoundEx)
 				{
-					text =  text.Replace(propertizzle, "Value Not Found");
+					AllImagesHaveAllExif = false;
+					text =  text.Replace(propertizzle, "Unknown");
 				}
 				
 			}

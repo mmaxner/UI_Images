@@ -54,11 +54,10 @@
 			this.checkBox1 = new System.Windows.Forms.CheckBox();
 			this.btnAddExif = new System.Windows.Forms.Button();
 			this.txtFilenameFormula = new System.Windows.Forms.TextBox();
-			this.btnAddText = new System.Windows.Forms.Button();
 			this.btnRename = new System.Windows.Forms.Button();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
-			this.txtLiteralText = new System.Windows.Forms.TextBox();
+			this.lblExifWarning = new System.Windows.Forms.Label();
 			this.menuStrip1.SuspendLayout();
 			this.ctmOpen.SuspendLayout();
 			this.SuspendLayout();
@@ -336,16 +335,6 @@
 			this.txtFilenameFormula.TabIndex = 16;
 			this.txtFilenameFormula.TextChanged += new System.EventHandler(this.txtFilenameFormula_TextChanged);
 			// 
-			// btnAddText
-			// 
-			this.btnAddText.Location = new System.Drawing.Point(959, 493);
-			this.btnAddText.Name = "btnAddText";
-			this.btnAddText.Size = new System.Drawing.Size(135, 35);
-			this.btnAddText.TabIndex = 17;
-			this.btnAddText.Text = "Add Text To Name";
-			this.btnAddText.UseVisualStyleBackColor = true;
-			this.btnAddText.Click += new System.EventHandler(this.btnAddText_Click);
-			// 
 			// btnRename
 			// 
 			this.btnRename.Location = new System.Drawing.Point(1261, 419);
@@ -375,12 +364,16 @@
 			this.label3.TabIndex = 20;
 			this.label3.Text = resources.GetString("label3.Text");
 			// 
-			// txtLiteralText
+			// lblExifWarning
 			// 
-			this.txtLiteralText.Location = new System.Drawing.Point(726, 465);
-			this.txtLiteralText.Name = "txtLiteralText";
-			this.txtLiteralText.Size = new System.Drawing.Size(368, 22);
-			this.txtLiteralText.TabIndex = 21;
+			this.lblExifWarning.AutoSize = true;
+			this.lblExifWarning.ForeColor = System.Drawing.Color.Red;
+			this.lblExifWarning.Location = new System.Drawing.Point(1223, 49);
+			this.lblExifWarning.Name = "lblExifWarning";
+			this.lblExifWarning.Size = new System.Drawing.Size(301, 17);
+			this.lblExifWarning.TabIndex = 21;
+			this.lblExifWarning.Text = "Some Images Do Not Have All Listed Exif Tags";
+			this.lblExifWarning.Visible = false;
 			// 
 			// MainForm
 			// 
@@ -388,11 +381,10 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(1541, 666);
-			this.Controls.Add(this.txtLiteralText);
+			this.Controls.Add(this.lblExifWarning);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.btnRename);
-			this.Controls.Add(this.btnAddText);
 			this.Controls.Add(this.txtFilenameFormula);
 			this.Controls.Add(this.btnAddExif);
 			this.Controls.Add(this.checkBox1);
@@ -444,11 +436,10 @@
 		private System.Windows.Forms.CheckBox checkBox1;
 		private System.Windows.Forms.Button btnAddExif;
 		private System.Windows.Forms.TextBox txtFilenameFormula;
-		private System.Windows.Forms.Button btnAddText;
 		private System.Windows.Forms.Button btnRename;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.TextBox txtLiteralText;
+		private System.Windows.Forms.Label lblExifWarning;
 	}
 }
 

@@ -204,26 +204,26 @@ namespace PhotoRenamer
 			txtFilenameFormula.Text += "<" + lstExifTags.SelectedItem.ToString() + ">";
 		}
 
-		
-
-		private void btnAddText_Click(object sender, EventArgs e)
-		{
-			txtFilenameFormula.Text += txtLiteralText.Text;
-			txtLiteralText.Text = "";
-		}
-
 		private void btnRename_Click(object sender, EventArgs e)
 		{
-			
+			foreach (ListViewItem pic in listViewImages.Items)
+			{
+				string NewName = renamer.ParseString(txtFilenameFormula.Text, pic.Text);
+				string OriginalPath = pic.Name;
+				string NewPath = OriginalPath.Substring(0, OriginalPath.LastIndexOfAny(new char[] { '/', '\\' })) + NewName;
+				File.Move(OriginalPath, NewPath);
+			}
 		}
 
 		private void UpdatePreview()
 		{
+			renamer.AllImagesHaveAllExif = true;
 			lstPreview.Items.Clear();
 			foreach (ListViewItem pic in listViewImages.Items)
 			{
 				lstPreview.Items.Add(renamer.ParseString(txtFilenameFormula.Text, pic.Text));
 			}
+			lblExifWarning.Visible = !renamer.AllImagesHaveAllExif;
 		}
 
 		private void txtFilenameFormula_TextChanged(object sender, EventArgs e)
